@@ -19,7 +19,7 @@ module.exports ={
             {name: '!leave', value: 'Stops and clears the queue'},
             {name: '!clear', value: 'Clear the queue (Under works)'}
         )
-        .setFooter('Made my Aditya :)');
+        .setFooter('Made by Aditya :)');
 
         message.channel.send(helpList);
     }
