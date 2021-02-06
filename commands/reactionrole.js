@@ -4,7 +4,6 @@ module.exports ={
     description: "Set up a reaction role message!",
     //async and wait for getting roles
     async execute(message, args, Discord, client){
-        if(message.member.roles.cache.has('760549648938303519'|| '766754924511625267')){//only admins can use this 
         const channel = '760541073738170419'; // specific channel
 
         //all the different roles
@@ -14,6 +13,8 @@ module.exports ={
         const HS = message.guild.roles.cache.find(role => role.name === "Hearthstone");
         const Apex = message.guild.roles.cache.find(role => role.name === "Apex Legends");
         const MW = message.guild.roles.cache.find(role => role.name === "Warzone");
+        const Civ = message.guild.roles.cache.find(role => role.name === "Civ 6");
+        const OW = message.guild.roles.cache.find(role => role.name === "Overwatch");
 
         //emoji for each role
         const siegeEmoji = '💣';
@@ -22,6 +23,8 @@ module.exports ={
         const hsEmoji = '🃏';
         const apexEmoji = '🗡️';
         const mwEmoji = '🔫';
+        const civEmoji = '🗺️';
+        const owEmoji = '🛡️';
 
         //embed for role granting
         let embed = new Discord.MessageEmbed()
@@ -33,7 +36,9 @@ module.exports ={
         +  `${mcEmoji} for MineCraft \n\n`
         +  `${hsEmoji} for Hearthstone \n\n`
         +  `${apexEmoji} for Apex Legends \n\n`
-        +  `${mwEmoji} for Warzone`);
+        +  `${mwEmoji} for Warzone\n\n`
+        +  `${civEmoji} for Civ 6 \n\n`
+        +  `${owEmoji} for Overwatch \n\n`);
 
         //await so the bot reacts to the role
         let messageEmbed = await message.channel.send(embed);
@@ -43,6 +48,8 @@ module.exports ={
         messageEmbed.react(hsEmoji);
         messageEmbed.react(apexEmoji);
         messageEmbed.react(mwEmoji);
+        messageEmbed.react(civEmoji);
+        messageEmbed.react(owEmoji);
 
         //add if the emoji is clicked by the user
         client.on('messageReactionAdd', async (reaction, user) => {
@@ -69,6 +76,12 @@ module.exports ={
                 }
                 if(reaction.emoji.name === mwEmoji){
                     await reaction.message.guild.members.cache.get(user.id).roles.add(MW);
+                }
+                if(reaction.emoji.name === civEmoji){
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(Civ);
+                }
+                if(reaction.emoji.name === owEmoji){
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(OW);
                 }
             }
             else{
@@ -102,15 +115,16 @@ module.exports ={
                 if(reaction.emoji.name === mwEmoji){
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(MW);
                 } 
+                if(reaction.emoji.name === civEmoji){
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(Civ);
+                }
+                if(reaction.emoji.name === owEmoji){
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(OW);
+                } 
             }
             else{
                 return;
             }
         });
-        }
-        //throw for an invalid user trying to use the command
-        else{
-            message.channel.send("You don't have permission to use this command");
-        }
     }
 }
