@@ -20,7 +20,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message =>{
-    welcome(client); //uncomment to start welcome message func
+    //welcome(client); uncomment to start welcome message func
 
     //check if message is command or a random statement
     if(!message.content.startsWith(prefix) || message.author.bot) return;
